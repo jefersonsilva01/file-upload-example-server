@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const cors = require("cors");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
@@ -32,11 +32,19 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.locals.title = 'Express - Generated with IronGenerator';
 
 // ADD CORS HERE:
+// allow access to the API from different domains/origins
+app.use(cors({
+  // this could be multiple domains/origins, but we will allow just our React app
+  origin: ["http://localhost:3000"]
+}));
+
 
 const index = require('./routes/index.routes');
 app.use('/', index);
 
 // include your new routes here:
 app.use('/api', require('./routes/thing.routes'));
+app.use('/api', require('./routes/file-upload-routes'));
+
 
 module.exports = app;

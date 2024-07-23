@@ -14,6 +14,7 @@ router.post('/things/create', (req, res, next) => {
   // console.log('body: ', req.body); ==> here we can see that all
   // the fields have the same names as the ones in the model so we can simply pass
   // req.body to the .create() method
+  console.log(req.body);
 
   Thing.create(req.body)
     .then(aNewThing => {
